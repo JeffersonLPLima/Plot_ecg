@@ -40,7 +40,7 @@ public class JFreeChartEx extends ApplicationFrame {
 	 ArrayList<String> signal = new ArrayList<>();
 	  Scanner read = null;
 	try {
-		read = new Scanner (new File("C:\\Users\\Jefferson\\Desktop\\Desktopv2\\ecg_zinaldo.txt"));
+		read = new Scanner (new File("..."));
 	} catch (FileNotFoundException e) {
 		 
 		e.printStackTrace();

@@ -1,11 +1,13 @@
-package testECGplot;
+package ecgplot;
 
  
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,26 +19,18 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.graphics2d.svg.SVGGraphics2D;
+import org.jfree.graphics2d.svg.SVGUtils;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 //http://www.jfree.org/forum/viewtopic.php?t=117574
-public class JFreeChartEx extends ApplicationFrame {
+public class JFreeChartEx{
  
-  private static final long serialVersionUID = 1L;
- 
-  public JFreeChartEx(String title) {
-    super(title);
-    JPanel chartPanel = createDemoPanel();
-    chartPanel.setPreferredSize(new java.awt.Dimension(600, 270));
-    setContentPane(chartPanel);
 
-  }
+
 
   private static JFreeChart createChart() {
-	   
-
-	 
 	 ArrayList<String> signal = new ArrayList<>();
 	  Scanner read = null;
 	try {
@@ -69,30 +63,30 @@ public class JFreeChartEx extends ApplicationFrame {
        
     }
 
-    JFreeChart chart =
-        ChartFactory.createXYLineChart("Eletrocardiograma", "Tempo (s)", "Medida", dataset1);
-
+    JFreeChart chart = ChartFactory.createXYLineChart("Eletrocardiograma 250hz", "Tempo (s)", "Medida", dataset1);
     chart.setBackgroundPaint(Color.white);
-    XYPlot plot = (XYPlot) chart.getPlot();
-
+ 
  
     return chart;
 
   }
  
  
-  public static JPanel createDemoPanel() {
-    JFreeChart chart = createChart();
-    return new ChartPanel(chart);
-  }
  
   public static void main(String[] args) {
 
-    JFreeChartEx demo = new JFreeChartEx("");
-    demo.pack();
-    RefineryUtilities.centerFrameOnScreen(demo);
-    demo.setVisible(true);
-    
+	  JFreeChart chart = createChart();
+      SVGGraphics2D g2 = new SVGGraphics2D(10000,1000); 
+      Rectangle r = new Rectangle(0, 0, 10000, 1000); 
+      
+      chart.draw(g2, r); 
+      File f = new File("ECG.svg"); 
+      try {
+		SVGUtils.writeToSVG(f, g2.getSVGElement());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
   }
 
 }

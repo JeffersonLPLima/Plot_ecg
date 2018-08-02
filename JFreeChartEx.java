@@ -20,7 +20,7 @@ import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
 
 //http://www.jfree.org/forum/viewtopic.php?t=117574
-public class PlotECG{
+public class JFreeChartEx{
 
 	private static JFreeChart createChart(ArrayList<String> signal, String user, String classification, String confidence) {
 		/*

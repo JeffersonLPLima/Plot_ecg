@@ -23,11 +23,12 @@ import org.jfree.ui.RectangleEdge;
 public class PlotECG{
 
 	private static JFreeChart createChart(ArrayList<String> signal, String user, String classification, String confidence) {
+		/*
 		signal = new ArrayList<>();
 		user = "Fulano";
 		classification = "Normal";
 		confidence = "93%";
-		
+		*/
 		if(classification.equals("Normal")) {
 			classification="Rítmo Normal";
 		}else if(classification.equals("AF")) {
@@ -37,7 +38,7 @@ public class PlotECG{
 		}else{
 			classification="Ruído";
 		}	
-		
+		/*
 		Scanner read = null;
 		try {
 			read = new Scanner (new File("ecg.txt"));
@@ -51,7 +52,7 @@ public class PlotECG{
 			signal.add(read.next());  
 		}
 		read.close();
-		
+		*/
 		System.out.println(signal.size());
 		XYSeriesCollection dataset1 = new XYSeriesCollection();
 
@@ -75,11 +76,9 @@ public class PlotECG{
 		SVGGraphics2D g2 = new SVGGraphics2D(10000,1000); 
 		Rectangle r = new Rectangle(0, 0, 10000, 1000); 
 		
-		
-		
 		chart.getTitle().setPosition(RectangleEdge.TOP);
 		chart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
-        chart.getTitle().setFont(new Font("Dialog", Font.BOLD, 50));
+                chart.getTitle().setFont(new Font("Dialog", Font.BOLD, 50));
 		chart.draw(g2, r); 
 		File f = new File("ECG_"+user+".svg"); 
 		try {
@@ -93,11 +92,11 @@ public class PlotECG{
 	}
 
 
-
+/*
 	public static void main(String[] args) {
 
 		createChart(null, null, null, null);
 		 
 	}
-
+*/
 }
